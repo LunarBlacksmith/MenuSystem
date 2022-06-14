@@ -24,7 +24,6 @@ public class GameManager : MonoBehaviour
         {
             scr.x = Screen.width / 16;
             scr.y = Screen.height / 9;
-
         }
 
         switch (gamePlayStates)
@@ -86,13 +85,11 @@ public class GameManager : MonoBehaviour
          //        Cursor.lockState = CursorLockMode.Locked;
          //    }
          //}
-        
-
     }
 
 }
 
-    public enum GamePlayStates
+public enum GamePlayStates
 {
     PreGame,
     Game,

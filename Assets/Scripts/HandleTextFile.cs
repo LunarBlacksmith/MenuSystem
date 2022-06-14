@@ -24,12 +24,12 @@ public class HandleTextFile
     {
         //true - add to file
         //false - overwrite file
-        StreamWriter sWriter = new StreamWriter(path, true);
+        StreamWriter sWriter = new StreamWriter(path, false);
         //write each of our keys in the file
         foreach (var keyEntry in KeyBinds.keys)
         {
             //each Key name and Key value will be written in with a : to separate them
-            sWriter.Write(keyEntry.Key + ":" + keyEntry.Value.ToString());
+            sWriter.WriteLine(keyEntry.Key + ":" + keyEntry.Value.ToString());
         }
         //writing is done
         sWriter.Close();

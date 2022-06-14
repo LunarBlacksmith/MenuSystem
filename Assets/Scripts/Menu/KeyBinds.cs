@@ -31,9 +31,7 @@ public class KeyBinds : MonoBehaviour
             PlayerPrefs.SetString("FirstLoad", "");
         }
         else
-        {
-            HandleTextFile.ReadSaveFile();
-        }
+        { HandleTextFile.ReadSaveFile(); }
 
         for (int i = 0; i < baseSetup.Length; i++)
         {
@@ -77,13 +75,9 @@ public class KeyBinds : MonoBehaviour
             //There is an issue with Unity in getting the left and right shift keys
             //The following part fixes this issue
             if (Input.GetKey(KeyCode.LeftShift))
-            {
-                newKey = "LeftShift";
-            }
+            { newKey = "LeftShift"; }
             if (Input.GetKey(KeyCode.RightShift))
-            {
-                newKey = "RightShift";
-            }
+            { newKey = "RightShift"; }
 
             //if we have set a key
             if (newKey != "")
