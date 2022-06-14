@@ -1,0 +1,1 @@
+Forward:WBackward:SLeft:ARight:DRotateL:LeftArrowRotateR:RightArrow
