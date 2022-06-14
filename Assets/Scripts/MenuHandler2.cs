@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -7,16 +8,13 @@ using UnityEngine.UI;
 public class MenuHandler2 : MonoBehaviour
 {
     public void ChangeScene(int sceneIndex_p)
-    {
-        SceneManager.LoadScene(sceneIndex_p);
-    }
+    { SceneManager.LoadScene(sceneIndex_p); }
 
     public void Quit()
-    {
-        Application.Quit();
-#if UNITY_EDITOR
-
-#endif
+    { Application.Quit();
+    #if UNITY_EDITOR
+        EditorApplication.isPlaying = false; // stops playmode
+    #endif
     }
 
     #region Audio

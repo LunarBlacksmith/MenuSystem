@@ -45,6 +45,7 @@ public class KeyBinds : MonoBehaviour
     {
         //press return button
         HandleTextFile.WriteSaveFile();
+        VideoOptions.WriteSaveFile();
     }
     public void ChangeKey(GameObject clickedKey_p)
     {
