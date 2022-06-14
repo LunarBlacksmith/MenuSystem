@@ -37,10 +37,10 @@ public class GameManager : MonoBehaviour
                     {
                         Cursor.visible = true;
                         Cursor.lockState = CursorLockMode.None;
-                        Debug.Log("Debug 43");
-                        optionsMenu.SetActive(true);
-                        Debug.Log("Debug 45");
                     }
+                    Debug.Log("Debug 43");
+                    optionsMenu.SetActive(true);
+                    Debug.Log("Debug 45");
                     break;
                 }
             default:
