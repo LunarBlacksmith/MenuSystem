@@ -1,0 +1,6 @@
+Forward:W
+Backwards:S
+Left:A
+Right:D
+RotateL:LeftArrow
+RotateR:RightArrow

@@ -15,7 +15,8 @@ a byte stream is a succession of a group of bits
 public class VideoOptions
 {
     // at this file location
-    static string path = "Assets/Resources/Save/VideoOptions.txt";
+    static string path = Path.Combine(Application.streamingAssetsPath, "Save/VideoOptions.txt");
+    //static string path = "Assets/Resources/Save/VideoOptions.txt";
 
     // Unity Editor allows me to create a tool in my Menus
 #if UNITY_EDITOR
@@ -40,10 +41,10 @@ public class VideoOptions
         sWriter.Close();
 
         // re-import the file to update the reference in the editor
-#if UNITY_EDITOR
-          AssetDatabase.ImportAsset(path);
-          TextAsset asset = Resources.Load("Save/VideoOptions.txt") as TextAsset;
-#endif
+//#if UNITY_EDITOR
+//          AssetDatabase.ImportAsset(path);
+//          TextAsset asset = Resources.Load("Save/VideoOptions.txt") as TextAsset;
+//#endif
     }
 
 #if UNITY_EDITOR

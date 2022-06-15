@@ -69,8 +69,6 @@ public class MenuHandler : MonoBehaviour
 
     public void Start()
     {
-        DontDestroyOnLoad(this);
-
         resolutions = Screen.resolutions;
         resDropdown.ClearOptions();
         List<string> options = new List<string>();

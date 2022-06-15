@@ -1,0 +1,3 @@
+Fullscreen:False
+Resolution:1920 x 1080 @ 144Hz
+Quality:3

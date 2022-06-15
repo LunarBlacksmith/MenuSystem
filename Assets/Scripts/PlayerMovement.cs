@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    // static Vector3's will be assigned value from other scripts depending on what buttons the player clicks
+    public static Vector3 playerPos;
+    public static Vector3 playerRot;
     public float speed = 3f;
     public float rotateSpeed = 1.0f;
     public float smooth = 5.0f;
@@ -9,6 +12,11 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     { PlayerMove(); }
 
+    private void Awake()
+    {
+        transform.position  = playerPos;    // assign player position on game loading
+        transform.up        = playerRot;    // assign player rotation on game loading
+    }
     private void PlayerMove()
     {
         Vector2 moveDir = Vector2.zero;
