@@ -31,24 +31,39 @@ public class MenuHandler : MonoBehaviour
     public Slider tempSlider;
 
     public void GetSlider(Slider slider_p)
-    { tempSlider = slider_p; }
+    {
+        Debug.Log(slider_p);
+        
+        tempSlider = slider_p;
+
+        Debug.Log(tempSlider);
+    }
+
+
 
     public void MuteToggle(bool isMuted_p)
     {
+        Debug.Log("bool muted"+isMuted_p);
         if (isMuted_p)
         {
             masterAudio.SetFloat(currentSlider, -80);
             tempSlider.interactable = false;
+            Debug.Log("muted is true");
         }
         else
         {
+            Debug.Log("muted was false");
             masterAudio.SetFloat(currentSlider, tempSlider.value);
             tempSlider.interactable = true;
         }
     }
 
     public void CurrentSlider(string sliderName_p)
-    { currentSlider = sliderName_p; }
+    {
+        Debug.Log("current slider entered");
+        currentSlider = sliderName_p;
+        Debug.Log(currentSlider);
+    }
 
     public void ChangeVolume(float volume_p)
     { masterAudio.SetFloat(currentSlider, volume_p); }

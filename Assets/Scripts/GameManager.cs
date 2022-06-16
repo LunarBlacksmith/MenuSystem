@@ -4,14 +4,16 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public bool gamePaused = false;
-    public static GamePlayStates gamePlayStates;
-    public GameObject optionsMenu;
     public static PlayerMovement player;
-
+    public static GamePlayStates gamePlayStates;
+    public bool gamePaused = false;
+    public GameObject optionsMenu;
+    
     public void Start()
     { 
+        // retrieving the player object to manipulate its data later for saving and loading
         player = FindObjectOfType<PlayerMovement>();
+        // make Game state the default state
         gamePlayStates = GamePlayStates.Game;
     }
 
@@ -105,9 +107,7 @@ public class GameManager : MonoBehaviour
             GameSaves.ReadSaveFile(player.gameObject);
         }
         catch (System.Exception)
-        {
-            return;
-        }
+        { return; }
     }
 
     public void NewGame()

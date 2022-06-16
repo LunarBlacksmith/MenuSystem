@@ -14,7 +14,7 @@ a byte stream is a succession of a group of bits
 public class HandleTextFile
 {
     // at this file location
-    static string path = Path.Combine(Application.streamingAssetsPath,"Save/Keybinds.txt");
+    static string path = Path.Combine(Application.streamingAssetsPath, "Save/Keybinds.txt");
 
     // Unity Editor allows me to create a tool in my Menus
 #if UNITY_EDITOR
