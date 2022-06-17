@@ -1,24 +1,40 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public static PlayerMovement player;
     public static GamePlayStates gamePlayStates;
     public bool gamePaused = false;
     public GameObject optionsMenu;
+    public Transform player;
+    public bool isNewGame = false;
     
     public void Start()
-    { 
-        // retrieving the player object to manipulate its data later for saving and loading
-        player = FindObjectOfType<PlayerMovement>();
+    {
         // make Game state the default state
         gamePlayStates = GamePlayStates.Game;
+        if (GameObject.FindGameObjectWithTag("Player"))
+        {
+            player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        }
     }
 
     void Update()
     {
+        // if it's a new game
+        if (isNewGame)
+        {
+            // and we can find the player
+            if (GameObject.FindGameObjectWithTag("Player"))
+            {
+                // reset their actual position in the engine
+                player.position = PlayerMovement.playerPos;
+                player.rotation = PlayerMovement.playerRot;
+                // change our boolean to not a new game (the opposite of what it was)
+                isNewGame = !isNewGame;
+            }
+        }
+
         // if the MainMenu is the current scene
         if (SceneManager.GetSceneByBuildIndex(0).isLoaded)
         {
@@ -36,6 +52,14 @@ public class GameManager : MonoBehaviour
             return; // don't run any other code in Update() if we're in the MainMenu scene
         }
 
+#if UNITY_EDITOR
+        // because Unity stupid, need to use P key instead of Escape
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            gamePaused = !gamePaused; // opposite of what it was
+            gamePlayStates = gamePaused ? GamePlayStates.MenuPause : GamePlayStates.Game;
+        }
+#endif
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             gamePaused = !gamePaused; // opposite of what it was
@@ -86,25 +110,30 @@ public class GameManager : MonoBehaviour
 
     public void SaveGame(int saveIndex_p)
     {
-        if (player == null)
-        {
-            Debug.LogWarning("Cannot find a GameObject with the type of PlayerMovement.");
-            return;
-        }
-        GameSaves.ChooseSlot(saveIndex_p);
-        GameSaves.WriteSaveFile(player.gameObject);
+        // change the save slot path according to the index passed
+        GameSaves.ChooseSlotSave(saveIndex_p);
+        // then write a text save file to the static file path that was just changed
+        GameSaves.WriteSaveFile(player);
     }
     public void LoadGame(int saveIndex_p)
     {
-        if (player == null)
-        {
-            Debug.LogWarning("Cannot find a GameObject with the type of PlayerMovement.");
-            return;
-        }
         try
         {
-            GameSaves.ChooseSlot(saveIndex_p);
-            GameSaves.ReadSaveFile(player.gameObject);
+            // if we call this method with save index of -1
+            if (saveIndex_p == -1)
+            {
+                try
+                {
+                    // we want to load the last save slot we saved to, not pass it a specific save slot
+                    GameSaves.ChooseLastSave();
+                    return;
+                }
+                catch (System.Exception)
+                { return; }
+            }
+
+            // here we change the static path we load from according to the index we pass
+            GameSaves.ChooseSlotLoad(saveIndex_p);
         }
         catch (System.Exception)
         { return; }
@@ -112,8 +141,11 @@ public class GameManager : MonoBehaviour
 
     public void NewGame()
     {
-        PlayerMovement.playerPos = new Vector3(0, -4, 0);   // reset player position
-        PlayerMovement.playerRot = Vector3.zero;            // reset player rotation
+        // reset the static player variables
+        PlayerMovement.playerPos = new Vector3(0, -4, 0);
+        PlayerMovement.playerRot = Quaternion.identity;
+        // tell the game that it is a new game so we can reset in-game player position/rotation
+        isNewGame = true;
     }
 
     public void PauseGame()

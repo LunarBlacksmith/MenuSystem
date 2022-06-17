@@ -1,4 +1,4 @@
-Forward:W
+Forward:UpArrow
 Backwards:S
 Left:A
 Right:D

@@ -1,0 +1,2 @@
+Player Position:(-8.6, -4.4, 0.0)
+Player Rotation:(0.0, 0.0, -0.8, 0.6)
